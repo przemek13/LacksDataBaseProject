@@ -8,12 +8,12 @@ public class User {
     private int employeeID;
     private String login;
     private String password;
-    private int skypeID;
+    private String skypeID;
     private Role role;
 
     static List<User>listOfUsers = new ArrayList<>();
 
-    public User(String employeeName, int employeeID, String login, String password, int skypeID, Role role) {
+    public User(String employeeName, int employeeID, String login, String password, String skypeID, Role role) {
         this.employeeName = employeeName;
         this.employeeID = employeeID;
         this.login = login;
@@ -54,11 +54,11 @@ public class User {
         this.password = password;
     }
 
-    public int getSkypeID() {
+    public String getSkypeID() {
         return skypeID;
     }
 
-    public void setSkypeID(int skypeID) {
+    public void setSkypeID(String skypeID) {
         this.skypeID = skypeID;
     }
 
