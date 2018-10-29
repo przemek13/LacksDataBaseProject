@@ -1,5 +1,8 @@
 package LacksDataBaseProject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
     private String employeeName;
     private int employeeID;
@@ -7,6 +10,8 @@ public class User {
     private String password;
     private int skypeID;
     private Role role;
+
+    static List<User>listOfUsers = new ArrayList<>();
 
     public User(String employeeName, int employeeID, String login, String password, int skypeID, Role role) {
         this.employeeName = employeeName;
