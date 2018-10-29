@@ -69,4 +69,12 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
+
+    public static List<User> getListOfUsers() {
+        return listOfUsers;
+    }
+
+    public static void setListOfUsers(List<User> listOfUsers) {
+        User.listOfUsers = listOfUsers;
+    }
 }
