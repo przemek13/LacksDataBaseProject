@@ -8,12 +8,13 @@ public class User {
     private int skypeID;
     private Role role;
 
-    public User(String employeeName, int employeeID, String login, String password, int skypeID) {
+    public User(String employeeName, int employeeID, String login, String password, int skypeID, Role role) {
         this.employeeName = employeeName;
         this.employeeID = employeeID;
         this.login = login;
         this.password = password;
         this.skypeID = skypeID;
+        this.role = role;
     }
 
     public String getEmployeeName() {
@@ -54,5 +55,13 @@ public class User {
 
     public void setSkypeID(int skypeID) {
         this.skypeID = skypeID;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
