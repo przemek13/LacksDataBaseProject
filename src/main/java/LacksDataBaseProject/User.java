@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    private String employeeName;
-    private int employeeID;
+    private String userName;
+    private int userID;
     private String login;
     private String password;
     private String skypeID;
@@ -13,29 +13,29 @@ public class User {
 
     static List<User>listOfUsers = new ArrayList<>();
 
-    public User(String employeeName, int employeeID, String login, String password, String skypeID, Role role) {
-        this.employeeName = employeeName;
-        this.employeeID = employeeID;
+    public User(String userName, String login, String password, String skypeID, Role role) {
+        this.userName = userName;
+        userID = ++userID;
         this.login = login;
         this.password = password;
         this.skypeID = skypeID;
         this.role = role;
     }
 
-    public String getEmployeeName() {
-        return employeeName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public int getEmployeeID() {
-        return employeeID;
+    public int getUserID() {
+        return userID;
     }
 
-    public void setEmployeeID(int employeeID) {
-        this.employeeID = employeeID;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public String getLogin() {
@@ -76,5 +76,17 @@ public class User {
 
     public static void setListOfUsers(List<User> listOfUsers) {
         User.listOfUsers = listOfUsers;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userName='" + userName + '\'' +
+                ", userID=" + userID +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", skypeID='" + skypeID + '\'' +
+                ", role=" + role +
+                '}';
     }
 }
