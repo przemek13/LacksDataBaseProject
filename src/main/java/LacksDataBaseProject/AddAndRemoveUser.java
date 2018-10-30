@@ -1,6 +1,5 @@
 package LacksDataBaseProject;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class AddAndRemoveUser {
@@ -8,37 +7,35 @@ public class AddAndRemoveUser {
 
     public static void addUser(User user){
         System.out.println("Name: ");
-        input = User.userName;
+        String userName = input.next();
         System.out.println("SkypeID: ");
-        input = User.skypeID;
+        String skypeId = input.next();
         System.out.println("Role: ");
-
+        // rola do wyboru purchaser lub forwarder
 
         System.out.println("Login: ");
-        input = User.login;
+        String login = input.next();
         System.out.println("Password: ");
-        input = User.password;
+        String password = input.next();
         System.out.println("Repeat password: ");
-        input = User.password2;
+        String password2 = input.next();
         if (password.equals(password2)){
-            new User(userName, login, password, skypeIde, role);
-            break;
+            User newUser = new User(userName, login, password, skypeId, Role.ADMIN);  //rola do wyboru
+            User.listOfUsers.add(newUser);
         } else {
             System.out.println("Password is not correct.");
         }
-
     }
 
-    public static void removeUser(User user) {
-//        System.out.println("Give me user ID, to remove: ");
-//        for (User x : User.listOfUsers) {
-//            if (x.getUserID().) {
-//                User.listOfUsers.remove(user);
-//                System.out.println("User deleted.");
-//                return;
-//
-//            }
-//        }
-    }
+    public static void removeUser() {
+       System.out.println("Give me user ID, to remove: ");
+       int userId = input.nextInt();
+        for (User user : User.listOfUsers)
+            if (user.getUserID() == userId) {
+                User.listOfUsers.remove(user);
+                System.out.println("User deleted.");
+                return;
+           }
+        }
 }
 

@@ -12,7 +12,7 @@ public class App
         User user = new User("Oskar", "oski83", "oski", "oski82", Role.ADMIN);
         AddAndRemoveUser.addUser(user);
         System.out.println(User.listOfUsers);
-        AddAndRemoveUser.removeUser(user);
+        AddAndRemoveUser.removeUser();
         System.out.println(User.listOfUsers);
     }
 }
