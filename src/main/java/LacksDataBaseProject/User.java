@@ -13,9 +13,9 @@ public class User {
 
     static List<User>listOfUsers = new ArrayList<>();
 
-    public User(String employeeName, int employeeID, String login, String password, String skypeID, Role role) {
-        this.userName = employeeName;
-        this.userID = employeeID;
+    public User(String userName, String login, String password, String skypeID, Role role) {
+        this.userName = userName;
+        userID = ++userID;
         this.login = login;
         this.password = password;
         this.skypeID = skypeID;
@@ -76,5 +76,17 @@ public class User {
 
     public static void setListOfUsers(List<User> listOfUsers) {
         User.listOfUsers = listOfUsers;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userName='" + userName + '\'' +
+                ", userID=" + userID +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", skypeID='" + skypeID + '\'' +
+                ", role=" + role +
+                '}';
     }
 }

@@ -1,6 +1,6 @@
 package LacksDataBaseProject;
 
-public class SetDateCommentAndOrderedAmount {
+public class SetLack {
     public static void setDate(){
 
     }
@@ -8,6 +8,9 @@ public class SetDateCommentAndOrderedAmount {
 
     }
     public static void setOrderedAmount(){
+
+    }
+    public static void changePurchaser(){
 
     }
 }
