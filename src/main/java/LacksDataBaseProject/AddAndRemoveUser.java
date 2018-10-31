@@ -34,10 +34,10 @@ public class AddAndRemoveUser {
     }
 
     public static void removeUser () {
-            System.out.println("Give me user ID, to remove: ");
-            int userId = input.nextInt();
+            System.out.println("Give skype ID, to remove: ");
+            String skypieID = input.next();
             for (User user : User.listOfUsers)
-                if (user.getUserID() == userId && user.getRole() != Role.ADMIN) {
+                if (user.getSkypeID() == skypieID && user.getRole() != Role.ADMIN) {
                     User.listOfUsers.remove(user);
                     System.out.println("User was removed.");
                     return;

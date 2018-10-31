@@ -5,7 +5,6 @@ import java.util.List;
 
 public class User {
     private String userName;
-    private int userID;
     private String login;
     private String password;
     private String skypeID;
@@ -18,7 +17,6 @@ public class User {
 
     public User(String userName, String login, String password, String skypeID, Role role) {
         this.userName = userName;
-        userID = ++userID;
         this.login = login;
         this.password = password;
         this.skypeID = skypeID;
@@ -31,14 +29,6 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
     }
 
     public String getLogin() {
@@ -85,7 +75,6 @@ public class User {
     public String toString() {
         return "User{" +
                 "userName='" + userName + '\'' +
-                ", userID=" + userID +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", skypeID='" + skypeID + '\'' +

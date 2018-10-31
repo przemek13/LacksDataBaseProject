@@ -19,13 +19,13 @@ public class AddAndRemoveLack {
 
     }
     public static void removeLack(){
-        System.out.println("Give number of itemID to deleted:");
+        System.out.println("Give number of itemID to remove:");
         String itemID = input.next();
-        for(Lack lack : LackOperations.lackList)
+        /*for(Lack lack : LackOperations.lackList)
             if(Lack.getItemID == itemID){
                 LackOperations.lacksList.remove(lack);
                 System.out.println("Lack was removed");
-            }
+            }*/
 
     }
     public static void chooseSupplier(){
