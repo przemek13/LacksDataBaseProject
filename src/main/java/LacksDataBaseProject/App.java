@@ -1,13 +1,14 @@
 package LacksDataBaseProject;
 
-/**
- * Hello world!
- *
- */
-public class App 
+public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        User testUser = new User();
+        Lack testLack = new Lack();
+        testUser.createMissingLackData(testLack, testUser);
+        System.out.println(testLack);
+        testUser.setLackID(testLack, testUser);
+        System.out.println(testLack);
     }
 }
