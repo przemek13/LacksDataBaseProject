@@ -6,12 +6,17 @@ import java.util.List;
 public class Supplier {
     private String supplierName;
     private int supplierID;
+    private User user;
 
-    static List<User> listOfSuppliers = new ArrayList<>();
+    static List<Supplier> listOfSuppliers = new ArrayList<>();
 
-    public Supplier(String supplierName, int supplierID) {
+    public Supplier() {
+    }
+
+    public Supplier(String supplierName, User user) {
         this.supplierName = supplierName;
-        this.supplierID = supplierID;
+        this.user = user;
+        supplierID = ++supplierID;
     }
 
     public String getSupplierName() {
@@ -30,11 +35,20 @@ public class Supplier {
         this.supplierID = supplierID;
     }
 
-    public static List<User> getListOfSuppliers() {
+    public static List<Supplier> getListOfSuppliers() {
         return listOfSuppliers;
     }
 
-    public static void setListOfSuppliers(List<User> listOfSuppliers) {
+    public static void setListOfSuppliers(List<Supplier> listOfSuppliers) {
         Supplier.listOfSuppliers = listOfSuppliers;
+    }
+
+    @Override
+    public String toString() {
+        return "Supplier{" +
+                "supplierName='" + supplierName + '\'' +
+                ", supplierID=" + supplierID +
+                ", user=" + user +
+                '}';
     }
 }

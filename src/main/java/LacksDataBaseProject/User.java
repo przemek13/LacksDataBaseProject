@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    protected String userName;
+    private String userName;
     private int userID;
     private String login;
     private String password;
@@ -12,6 +12,9 @@ public class User {
     private Role role;
 
     static List<User>listOfUsers = new ArrayList<>();
+
+    public User() {
+    }
 
     public User(String userName, String login, String password, String skypeID, Role role) {
         this.userName = userName;
