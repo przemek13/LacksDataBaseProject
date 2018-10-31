@@ -39,7 +39,7 @@ public class AddAndRemoveUser {
             for (User user : User.listOfUsers)
                 if (user.getUserID() == userId && user.getRole() != Role.ADMIN) {
                     User.listOfUsers.remove(user);
-                    System.out.println("User deleted.");
+                    System.out.println("User was removed.");
                     return;
             }
     }

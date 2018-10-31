@@ -26,7 +26,7 @@ public class AddAndRemoveSupplier {
         for (Supplier supplier : Supplier.listOfSuppliers) {
             if (supplier.getSupplierID() == supplierId) {
                 Supplier.listOfSuppliers.remove(supplier);
-                System.out.println("Supplier deleted.");
+                System.out.println("Supplier was removed.");
                 return;
             }
         }
