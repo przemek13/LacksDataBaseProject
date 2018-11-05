@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    private String userName;
-    private String login;
-    private String password;
-    private String skypeID;
-    private Role role;
+    protected String userName;
+    protected String login;
+    protected String password;
+    protected String skypeID;
+    protected Role role;
 
-    static List<User>listOfUsers = new ArrayList<>();
+    protected List<User>listOfUsers = new ArrayList<>();
 
     public User() {
     }
@@ -23,52 +23,12 @@ public class User {
         this.role = role;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getSkypeID() {
         return skypeID;
     }
 
-    public void setSkypeID(String skypeID) {
-        this.skypeID = skypeID;
-    }
-
     public Role getRole() {
         return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public static List<User> getListOfUsers() {
-        return listOfUsers;
-    }
-
-    public static void setListOfUsers(List<User> listOfUsers) {
-        User.listOfUsers = listOfUsers;
     }
 
     @Override

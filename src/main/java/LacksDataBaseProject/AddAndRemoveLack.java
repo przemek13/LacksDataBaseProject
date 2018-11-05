@@ -5,33 +5,41 @@ import java.util.Scanner;
 public class AddAndRemoveLack {
     static Scanner input = new Scanner(System.in);
 
-    public static void addlack(User user){
-        System.out.println("Item: ");
-        //Item item
-        System.out.println("Required amount: ");
-        int requiredAmount = input.nextInt();
-        System.out.println("Unit of measure: ");
-        String unitOfMeasure = input.next();
-        System.out.println("Comment: ");
-        String forwarderAdditionalComment = input.next();
-        // Lack lack = new Lack(item, requiredAmount, unitOfMeasure, forwarderAdditionalComment,....
-        // i dodatkowe dane które przekazuje Purchaser
-
+/*    protected void addlack(Lack lack,User user) {
+        if (checkIfForwarder(user)) {
+            lack.item = input.next();
+            System.out.println("Required amount: ");
+            lack.requiredAmount = input.nextInt();
+            System.out.println("Unit of measure: ");
+            lack.unitOfMeasure = input.next();
+            System.out.println("Comment: ");
+            lack.forwarderAdditionalComment = input.next();
+            lack.createMissingLackData();
+        } else {
+            return;
+        }
     }
-    public static void removeLack(){
-        System.out.println("Give number of itemID to remove:");
-        String itemID = input.next();
-        /*for(Lack lack : LackOperations.lackList)
-            if(Lack.getItemID == itemID){
-                LackOperations.lacksList.remove(lack);
+    protected void removeLack(Lack lack, User user) {
+        if (checkIfForwarder(user)) {
+            System.out.println("Give number of itemID to remove:");
+            lack.itemID = input.next();
+        for(Lack lack : LackOperations.lackList)
+            if(lack.getItemID == itemID){
+                lack.lacksList.remove(lack);
                 System.out.println("Lack was removed");
-            }*/
+            }
+        }
+    }*/
 
-    }
-    public static void chooseSupplier(){
-
-    }
     public static void changeStatus(){
+    }
 
+    private boolean checkIfForwarder(User user) {
+        boolean userForwarder = true;
+        if (user.getRole() != Role.FORWARDER) {
+            System.out.println("no authorization to create/change Lack data.");
+            userForwarder = false;
+        }
+        return userForwarder;
     }
 }
