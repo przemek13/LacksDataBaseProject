@@ -2,7 +2,7 @@ package LacksDataBaseProject;
 
 import java.util.Scanner;
 
-public class AddAndRemoveSupplier {
+public class AddAndRemoveSupplier extends  {
     static Scanner input = new Scanner(System.in);
 
     protected void addSupplier(Supplier supplier, User user) {
@@ -15,6 +15,7 @@ public class AddAndRemoveSupplier {
                     System.out.println("\t" + purcharser);
                     purcharser.skypeID = input.next();
                     if (purcharser.getSkypeID() == user.skypeID) {
+                        supplier.setSupplier(user); // pytanie powinno być user czy purchaser jako zmienna bo juz zgłupiałem?
                         supplier.listOfSuppliers.add(supplier);
                     }
                 }
@@ -29,7 +30,7 @@ public class AddAndRemoveSupplier {
             int supplierId = input.nextInt();
             for (Supplier supplierToRemove : supplier.listOfSuppliers) {
                 if (supplierToRemove.getSupplierID() == supplierId) {
-                    supplier.listOfSuppliers.remove(supplier);
+                    supplier.listOfSuppliers.remove(supplierToRemove);
                     System.out.println("Supplier was removed.");
                     return;
                 }

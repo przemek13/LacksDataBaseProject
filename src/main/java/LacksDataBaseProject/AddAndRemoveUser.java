@@ -6,27 +6,27 @@ public class AddAndRemoveUser {
     static Scanner input = new Scanner(System.in);
     private String password2;
 
-    protected void addUser(User user) {
-        if (checkIfAdmin(user)) {
+    protected void addUser(User addingUser, User addedUser) {
+        if (checkIfAdmin(addingUser)) {
             System.out.println("Name: ");
-            user.userName = input.next();
+            addedUser.userName = input.next();
             System.out.println("SkypeID: ");
-            user.skypeID = input.next();
+            addedUser.skypeID = input.next();
             System.out.println("Login: ");
-            user.login = input.next();
+            addedUser.login = input.next();
             System.out.println("Password: ");
-            user.password = input.next();
+            addedUser.password = input.next();
             System.out.println("Repeat password: ");
             password2 = input.next();
-            if (user.password.equals(password2)) {
+            if (addedUser.password.equals(password2)) {
                 while (true) {
                     System.out.println("Select user roles: ");
                     for (int i = 0; i < 2; i++) {
                         System.out.println("\t" + (i + 1) + ". " + Role.values()[i]);
                     }
                     int addUserRole = input.nextInt();
-                    Role role = Role.values()[addUserRole - 1];
-                    user.listOfUsers.add(user);
+                    addedUser.setRole(Role.values()[addUserRole - 1]);
+                    addedUser.listOfUsers.add(addedUser);
                     break;
                 }
             } else {
@@ -37,13 +37,13 @@ public class AddAndRemoveUser {
         }
     }
 
-    protected void removeUser (User user) {
-        if (checkIfAdmin(user)) {
+    protected void removeUser (User removingUser, User removedUser) {
+        if (checkIfAdmin(removingUser)) {
             System.out.println("Give skype ID, to remove: ");
-            user.skypeID = input.next();
-            for (User userToRemove : user.listOfUsers)
-                if (userToRemove.getSkypeID() == user.skypeID && userToRemove.getRole() != Role.ADMIN) {
-                    user.listOfUsers.remove(userToRemove);
+            removedUser.skypeID = input.next();
+            for (User userToRemove : removedUser.listOfUsers)
+                if (userToRemove.getSkypeID() == removedUser.skypeID && userToRemove.getRole() != Role.ADMIN) {
+                    removedUser.listOfUsers.remove(userToRemove);
                     System.out.println("User was removed.");
                     return;
                 }
