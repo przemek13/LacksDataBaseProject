@@ -1,6 +1,6 @@
 package LacksDataBaseProject;
 
-public abstract class  CheckUserRole implements CheckUser {
+public class CheckUserRole implements CheckUser {
 
     @Override
     public boolean checkIfAdmin(User user) {

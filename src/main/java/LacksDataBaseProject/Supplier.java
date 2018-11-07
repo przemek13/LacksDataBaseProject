@@ -23,6 +23,10 @@ public class Supplier {
         return supplierID;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "Supplier{" +

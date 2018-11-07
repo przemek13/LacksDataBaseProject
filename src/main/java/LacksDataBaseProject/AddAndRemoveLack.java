@@ -2,7 +2,7 @@ package LacksDataBaseProject;
 
 import java.util.Scanner;
 
-public class AddAndRemoveLack {
+public class AddAndRemoveLack extends CheckUserRole{
     static Scanner input = new Scanner(System.in);
 
     protected void addlack(Lack lack, User user) {
@@ -23,8 +23,7 @@ public class AddAndRemoveLack {
                 System.out.println("\t" + supplierToAdd);
                 int supplierId = input.nextInt();
                 if (supplierToAdd.getSupplierID() == supplier.supplierId) {
-                    // nie wiem jak przypisać tego suppliera po jego wyborze do lacka
-                    // np. lack.supplier ?
+                    lack.setSupplier(supplierToAdd);
                 }
             }
         } else {

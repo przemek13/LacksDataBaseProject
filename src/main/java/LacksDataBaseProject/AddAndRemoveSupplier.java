@@ -2,7 +2,7 @@ package LacksDataBaseProject;
 
 import java.util.Scanner;
 
-public class AddAndRemoveSupplier extends  {
+public class AddAndRemoveSupplier extends CheckUserRole {
     static Scanner input = new Scanner(System.in);
 
     protected void addSupplier(Supplier supplier, User user) {
@@ -15,7 +15,7 @@ public class AddAndRemoveSupplier extends  {
                     System.out.println("\t" + purcharser);
                     purcharser.skypeID = input.next();
                     if (purcharser.getSkypeID() == user.skypeID) {
-                        supplier.setSupplier(user); // pytanie powinno być user czy purchaser jako zmienna bo juz zgłupiałem?
+                        supplier.setUser(user);
                         supplier.listOfSuppliers.add(supplier);
                     }
                 }
@@ -38,14 +38,6 @@ public class AddAndRemoveSupplier extends  {
         } else {
             return;
         }
-    }
-    private boolean checkIfAdmin(User user) {
-        boolean userAdmin = true;
-        if (user.getRole() != Role.ADMIN) {
-            System.out.println("no authorization to add/remove User.");
-            userAdmin = false;
-        }
-        return userAdmin;
     }
 }
 

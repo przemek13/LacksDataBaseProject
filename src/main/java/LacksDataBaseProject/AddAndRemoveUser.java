@@ -2,7 +2,7 @@ package LacksDataBaseProject;
 
 import java.util.Scanner;
 
-public class AddAndRemoveUser {
+public class AddAndRemoveUser extends CheckUserRole {
     static Scanner input = new Scanner(System.in);
     private String password2;
 
@@ -38,7 +38,7 @@ public class AddAndRemoveUser {
     }
 
     protected void removeUser (User removingUser, User removedUser) {
-        if (checkIfAdmin(removingUser)) {
+       if (checkIfAdmin(removingUser)) {
             System.out.println("Give skype ID, to remove: ");
             removedUser.skypeID = input.next();
             for (User userToRemove : removedUser.listOfUsers)
@@ -50,14 +50,6 @@ public class AddAndRemoveUser {
         } else {
             return;
         }
-    }
-    private boolean checkIfAdmin(User user) {
-        boolean userAdmin = true;
-        if (user.getRole() != Role.ADMIN) {
-            System.out.println("no authorization to add/remove User.");
-            userAdmin = false;
-        }
-        return userAdmin;
     }
 }
 
