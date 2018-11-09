@@ -5,25 +5,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class LacksOperations {
+public class LacksOperations extends CheckUserRole {
 
     protected List<Lack> lacksList = new ArrayList<>();
 
     private int startId = 1;
 
-    private boolean checkIfForwarder(User user) {
-        boolean userForwarder = true;
-        if (user.getRole() != Role.FORWARDER) {
-            System.out.println("no authorization to create/change Lack data.");
-            userForwarder = false;
-        }
-        return userForwarder;
-    }
-
-
     protected void createMissingLackData(Lack lack, User user) {
         if (checkIfForwarder(user)) {
-            setLackID(lack, user);
+            setLackID(lack);
             setForwarderSkypeID(lack, user);
             setLacksSetDateAndTime(lack, user);
             openStatus(lack, user);
@@ -32,11 +22,12 @@ public class LacksOperations {
             setDefaultPurchaserAdditionalComment(lack, user);
             lacksList.add(lack);
             sendPurchaserAlert(lack, user);
+            sendForwarderAlert(lack, user);
         } else
             return;
     }
 
-    protected void setLackID(Lack lack, User user) {
+    protected void setLackID(Lack lack) {
 
         lack.setLackID(startId++);
     }
@@ -77,18 +68,24 @@ public class LacksOperations {
         }
     }
 
+    public List<Lack> getLacksList() {
+        return lacksList;
+    }
+
     protected void sendPurchaserAlert(Lack lack, User user) {
         if (checkIfForwarder(user)) {
-            System.out.println("Sending Alert to " + lack.getSupplier().user.getSkypeID());
+            if (lack.getSupplier().getUser() != null) {
+                System.out.println("Sending Alert to " + lack.getSupplier().getUser().getUserName());
+            }
         }
     }
 
     protected void sendForwarderAlert(Lack lack, User user) {
-        if (user.getRole() == Role.PURCHASER) {
+        if (user.getRole() == Role.FORWARDER) {
             if ((lack.getOrderedAmount() != 0) && (lack.getExpectedDeliveryDateAndTime() != lack.getLacksDateAndTime()) && (lack.getPurchaserAdditionalComment() != " ")) {
                 System.out.println("Sending Alert to" + lack.getForwarderSkypeID());
             }
         } else
-            System.out.println("no authorization to send alerts to forwarder.");
+            System.out.println("no authorization");
     }
 }

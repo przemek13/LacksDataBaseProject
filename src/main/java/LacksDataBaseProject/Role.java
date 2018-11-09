@@ -1,5 +1,5 @@
 package LacksDataBaseProject;
 
 public enum Role {
-    ADMIN, FORWARDER, PURCHASER
+    FORWARDER, PURCHASER, ADMIN
 }

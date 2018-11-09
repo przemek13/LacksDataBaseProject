@@ -5,27 +5,45 @@ public class Lack extends Item {
     public Lack() {
     }
 
-    private Item item;
+    protected Item item = new Item();
     private int requiredAmount;
     private String unitOfMeasure;
     private String forwarderAdditionalComment;
     private Supplier supplier = new Supplier();
-    // te pole powinno być wrzucone od razu w metodzie addLack, a nie osobno w choosesSupplier
-    // wartość przypisana tylko na potrzeby sprawdzenia
     private int lackID;
     private String forwarderSkypeID;
-    private String lacksDateAndTime; //zmieniłem na String
+    private String lacksDateAndTime;
     private Boolean status;
     private int orderedAmount;
-    private String expectedDeliveryDateAndTime; //zmieniłem na String
+    private String expectedDeliveryDateAndTime;
     private String purchaserAdditionalComment;
+
+    protected void setRequiredAmount(int requiredAmount) {
+        this.requiredAmount = requiredAmount;
+    }
+
+    protected void setUnitOfMeasure(String unitOfMeasure) {
+        this.unitOfMeasure = unitOfMeasure;
+    }
+
+    protected void setForwarderAdditionalComment(String forwarderAdditionalComment) {
+        this.forwarderAdditionalComment = forwarderAdditionalComment;
+    }
 
     protected Supplier getSupplier() {
         return supplier;
     }
 
+    protected void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
+
     protected void setLackID(int lackID) {
         this.lackID = lackID;
+    }
+
+    public int getLackID() {
+        return lackID;
     }
 
     protected String getForwarderSkypeID() {
@@ -44,9 +62,7 @@ public class Lack extends Item {
         this.lacksDateAndTime = lacksDateAndTime;
     }
 
-
     protected void setStatus(Boolean status) {
-
         this.status = status;
     }
 
@@ -77,10 +93,18 @@ public class Lack extends Item {
     @Override
     public String toString() {
         return "Lack{" +
-                "forwarderSkypeID='" + forwarderSkypeID + '\'' +
+                "item=" + item +
+                ", requiredAmount=" + requiredAmount +
+                ", unitOfMeasure='" + unitOfMeasure + '\'' +
+                ", forwarderAdditionalComment='" + forwarderAdditionalComment + '\'' +
+                ", supplier=" + supplier +
+                ", lackID=" + lackID +
+                ", forwarderSkypeID='" + forwarderSkypeID + '\'' +
                 ", lacksDateAndTime='" + lacksDateAndTime + '\'' +
                 ", status=" + status +
-                ", lackID=" + lackID +
+                ", orderedAmount=" + orderedAmount +
+                ", expectedDeliveryDateAndTime='" + expectedDeliveryDateAndTime + '\'' +
+                ", purchaserAdditionalComment='" + purchaserAdditionalComment + '\'' +
                 '}';
     }
 }
