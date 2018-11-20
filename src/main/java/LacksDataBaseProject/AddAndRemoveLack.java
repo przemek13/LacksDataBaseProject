@@ -8,9 +8,9 @@ public class AddAndRemoveLack extends CheckUserRole {
     protected void addlack(Lack lack, User user, Supplier supplier) {
         if (checkIfForwarder(user)) {
             System.out.println("Give item name: ");
-            lack.item.setItemID(input.next());
+            lack.setItemID(input.next());
             System.out.println("Give item ID: ");
-            lack.item.setItemName(input.next());
+            lack.setItemName(input.next());
             System.out.println("Required amount: ");
             lack.setRequiredAmount(Integer.parseInt(input.next()));
             System.out.println("Unit of measure: ");

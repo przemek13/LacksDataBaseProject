@@ -7,7 +7,7 @@ import java.util.List;
 
 public class LacksOperations extends CheckUserRole {
 
-    protected List<Lack> lacksList = new ArrayList<>();
+    protected final List<Lack> lacksList = new ArrayList<>();
 
     private int startId = 1;
 
@@ -23,8 +23,7 @@ public class LacksOperations extends CheckUserRole {
             lacksList.add(lack);
             sendPurchaserAlert(lack, user);
             sendForwarderAlert(lack, user);
-        } else
-            return;
+        }
     }
 
     protected void setLackID(Lack lack) {

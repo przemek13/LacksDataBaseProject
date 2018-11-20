@@ -2,14 +2,11 @@ package LacksDataBaseProject;
 
 public class Lack extends Item {
 
-    public Lack() {
-    }
-
-    protected Item item = new Item();
+    private Item item;
     private int requiredAmount;
     private String unitOfMeasure;
     private String forwarderAdditionalComment;
-    private Supplier supplier = new Supplier();
+    private Supplier supplier;
     private int lackID;
     private String forwarderSkypeID;
     private String lacksDateAndTime;
@@ -17,6 +14,22 @@ public class Lack extends Item {
     private int orderedAmount;
     private String expectedDeliveryDateAndTime;
     private String purchaserAdditionalComment;
+
+    public Lack(String itemId, String itemName, Item item, int requiredAmount, String unitOfMeasure, String forwarderAdditionalComment, Supplier supplier, int lackID, String forwarderSkypeID, String lacksDateAndTime, Boolean status, int orderedAmount, String expectedDeliveryDateAndTime, String purchaserAdditionalComment) {
+        super(itemId, itemName);
+        this.item = item;
+        this.requiredAmount = requiredAmount;
+        this.unitOfMeasure = unitOfMeasure;
+        this.forwarderAdditionalComment = forwarderAdditionalComment;
+        this.supplier = supplier;
+        this.lackID = lackID;
+        this.forwarderSkypeID = forwarderSkypeID;
+        this.lacksDateAndTime = lacksDateAndTime;
+        this.status = status;
+        this.orderedAmount = orderedAmount;
+        this.expectedDeliveryDateAndTime = expectedDeliveryDateAndTime;
+        this.purchaserAdditionalComment = purchaserAdditionalComment;
+    }
 
     protected void setRequiredAmount(int requiredAmount) {
         this.requiredAmount = requiredAmount;

@@ -3,7 +3,7 @@ package LacksDataBaseProject;
 public class App {
     public static void main(String[] args) {
 
-        User adminTestUser = new User(Role.ADMIN, new AddAndRemoveSupplier(), new AddAndRemoveUser());
+/*        User adminTestUser = new User(Role.ADMIN, new AddAndRemoveSupplier(), new AddAndRemoveUser());
         User forwarderTestUser = new User(Role.FORWARDER, new AddAndRemoveLack());
         User purchaserTestUser = new User(Role.PURCHASER, new SetLack());
         User purchaserTestUser2 = new User("Test Purchaser 2", "b", Role.PURCHASER);
@@ -57,6 +57,6 @@ public class App {
         purchaserTestUser.setLack.setDate(testLack, purchaserTestUser);
         purchaserTestUser.setLack.setComment(testLack, purchaserTestUser);
         purchaserTestUser.setLack.changePurchaser(testLack, purchaserTestUser);
-        System.out.println(forwarderTestUser.lacksList);
+        System.out.println(forwarderTestUser.lacksList);*/
     }
 }
