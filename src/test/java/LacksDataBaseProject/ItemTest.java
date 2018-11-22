@@ -10,7 +10,7 @@ public class ItemTest {
     private Item testItem;
 
     @Before
-    public void setUpItem () {
+    public void setUpTestItem () {
         this.testItem = new Item("itemTestID", "itemTestName");
     }
 

@@ -1,11 +1,14 @@
 package LacksDataBaseProject;
 
+import LacksDataBaseProject.Exceptions.LessThanZeroException;
+import LacksDataBaseProject.Exceptions.WrongDateFormatException;
+
 import java.util.Scanner;
 
 public class SetLack extends CheckUserRole {
     static Scanner input = new Scanner(System.in);
 
-    protected void setDate(Lack lack, User user) {
+    protected void setDate(Lack lack, User user) throws WrongDateFormatException {
         if (checkIfPurchaser(user)) {
             System.out.println("Give expected delivery date and time: ");
             lack.setExpectedDeliveryDateAndTime(input.next());
@@ -23,7 +26,7 @@ public class SetLack extends CheckUserRole {
         }
     }
 
-    protected void setOrderedAmount(Lack lack, User user) {
+    protected void setOrderedAmount(Lack lack, User user) throws LessThanZeroException {
         if (checkIfPurchaser(user)) {
             System.out.println("Give ordered amount: ");
             lack.setOrderedAmount(input.nextInt());

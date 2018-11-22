@@ -1,5 +1,9 @@
 package LacksDataBaseProject;
 
+import LacksDataBaseProject.Exceptions.LessThanZeroException;
+import LacksDataBaseProject.Exceptions.WrongDateFormatException;
+import LacksDataBaseProject.Exceptions.ZeroDataException;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,7 +15,7 @@ public class LacksOperations extends CheckUserRole {
 
     private int startId = 1;
 
-    protected void createMissingLackData(Lack lack, User user) {
+    protected void createMissingLackData(Lack lack, User user) throws ZeroDataException, WrongDateFormatException, LessThanZeroException {
         if (checkIfForwarder(user)) {
             setLackID(lack);
             setForwarderSkypeID(lack, user);
@@ -26,7 +30,7 @@ public class LacksOperations extends CheckUserRole {
         }
     }
 
-    protected void setLackID(Lack lack) {
+    protected void setLackID(Lack lack) throws ZeroDataException {
 
         lack.setLackID(startId++);
     }
@@ -37,9 +41,9 @@ public class LacksOperations extends CheckUserRole {
         }
     }
 
-    protected void setLacksSetDateAndTime(Lack lack, User user) {
+    protected void setLacksSetDateAndTime(Lack lack, User user) throws WrongDateFormatException {
         if (checkIfForwarder(user)) {
-            lack.setLacksDateAndTime(new SimpleDateFormat("yyyy-MM-dd, HH:mm ").format(new Date()));
+            lack.setLacksDateAndTime(new SimpleDateFormat("yyyy-MM-dd, HH:mm").format(new Date()));
         }
     }
 
@@ -49,15 +53,15 @@ public class LacksOperations extends CheckUserRole {
         }
     }
 
-    protected void setDefaultOrderedAmount(Lack lack, User user) {
+    protected void setDefaultOrderedAmount(Lack lack, User user) throws LessThanZeroException {
         if (checkIfForwarder(user)) {
             lack.setOrderedAmount(0);
         }
     }
 
-    protected void setDefaultExpectedDeliveryDateAndTime(Lack lack, User user) {
+    protected void setDefaultExpectedDeliveryDateAndTime(Lack lack, User user) throws WrongDateFormatException {
         if (checkIfForwarder(user)) {
-            lack.setExpectedDeliveryDateAndTime(lack.getLacksDateAndTime());
+            lack.setExpectedDeliveryDateAndTime(null);
         }
     }
 

@@ -13,6 +13,10 @@ public class Supplier {
     public Supplier() {
     }
 
+    public Supplier (String supplierName) {
+        this.supplierName = supplierName;
+    }
+
     public void setSupplierID(int supplierID) {
         this.supplierID = supplierID;
     }
