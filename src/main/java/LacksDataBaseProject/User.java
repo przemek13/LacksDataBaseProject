@@ -3,7 +3,7 @@ package LacksDataBaseProject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User extends LacksOperations {
+public class User extends LacksOperations{
     protected String userName;
     protected String login;
     protected String password;

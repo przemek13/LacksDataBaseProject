@@ -1,15 +1,13 @@
 package LacksDataBaseProject;
 
-import LacksDataBaseProject.Exceptions.LessThanZeroException;
-import LacksDataBaseProject.Exceptions.WrongDateFormatException;
-import LacksDataBaseProject.Exceptions.ZeroDataException;
+import LacksDataBaseProject.Exceptions.*;
 
 import java.util.Scanner;
 
 public class AddAndRemoveLack extends CheckUserRole {
     static Scanner input = new Scanner(System.in);
 
-    protected void addlack(Lack lack, User user, Supplier supplier) throws ZeroDataException, WrongDateFormatException, LessThanZeroException {
+    protected void addlack(Lack lack, User user, Supplier supplier) throws ZeroDataException, WrongDateFormatException, LessThanZeroException, ForwarderAccessException, UserLackException {
         if (checkIfForwarder(user)) {
             System.out.println("Give item name: ");
             lack.setItemID(input.next());

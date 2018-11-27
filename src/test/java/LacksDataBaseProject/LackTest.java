@@ -31,7 +31,6 @@ public class LackTest {
     private Lack testLack;
 
     @Before
-
     public void setUpTestLack() {
         this.testLack = new Lack("testItemID", "testItemName", 0, null, null, null, 0, null, null, null, 0, null, null);
     }
