@@ -40,7 +40,7 @@ public class LacksOperationsTest {
         when(testUser.getRole()).thenReturn(Role.FORWARDER);
         //when
         //then
-        assertEquals(true, testLackOperations.checkUser(testUser));
+        assertEquals(true, testLackOperations.checkUserRole(testUser));
     }
 
     @Test (expected = ForwarderAccessException.class)
@@ -50,7 +50,7 @@ public class LacksOperationsTest {
         when(testUser.getRole()).thenReturn(Role.PURCHASER);
         //when
         //then
-        assertEquals(false, testLackOperations.checkUser(testUser));
+        assertEquals(false, testLackOperations.checkUserRole(testUser));
     }
 
     @Test

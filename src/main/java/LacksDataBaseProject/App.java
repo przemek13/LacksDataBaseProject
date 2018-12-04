@@ -1,64 +1,59 @@
 package LacksDataBaseProject;
 
+import LacksDataBaseProject.Exceptions.NullUserException;
+
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
 
-/*      User adminTestUser = new User(Role.ADMIN, new AddAndRemoveSupplier(), new AddAndRemoveUser());
-        User forwarderTestUser = new User(Role.FORWARDER, new AddAndRemoveLack());
-        User purchaserTestUser = new User(Role.PURCHASER, new SetLack());
-        User purchaserTestUser2 = new User("Test Purchaser 2", "b", Role.PURCHASER);
-        User purchaserTestUser3 = new User("Test Purchaser 3", "c", Role.PURCHASER);
+        User user1 = createUser();
+        CRUDRepository<User> userCRUDRepository = new UserLocalRepository();
+        AddAndRemoveUser addAndRemoveUser = new AddAndRemoveUser(userCRUDRepository);
+    }
 
-        adminTestUser.addAndRemoveUser.addUser(adminTestUser, purchaserTestUser2);
-        adminTestUser.listOfUsers.add(adminTestUser);
-        adminTestUser.listOfUsers.add(purchaserTestUser2);
-        adminTestUser.listOfUsers.add(forwarderTestUser);
-        adminTestUser.listOfUsers.add(purchaserTestUser3);
-        adminTestUser.listOfUsers.add(purchaserTestUser2);
-        purchaserTestUser.listOfUsers.add(purchaserTestUser2);
-        System.out.println(adminTestUser.listOfUsers);
+    private static Scanner input = new Scanner(System.in);
 
-        adminTestUser.addAndRemoveUser.removeUser(adminTestUser, purchaserTestUser2);
-        System.out.println(adminTestUser.listOfUsers);
-        System.out.println();
+    public static final User NULL_OBJECT = new User("not found", "not found", "not found", "not found");
 
-        Lack testLack = new Lack();
-        Lack testLack2 = new Lack();
-        forwarderTestUser.createMissingLackData(testLack, forwarderTestUser);
-        forwarderTestUser.createMissingLackData(testLack2, forwarderTestUser);
-        for (Lack lack : forwarderTestUser.getLacksList()) {
-            System.out.println(lack);
+    private static User createUser() {
+        System.out.println("Insert name: ");
+        String userName = input.next();
+        System.out.println("Insert login: ");
+        String login = input.next();
+        System.out.println("Insert password: ");
+        String password = input.next();
+        System.out.println("Repeat password: ");
+        String password2 = input.next();
+        if (!password.equals(password2)) {
+            System.out.println("Password is not correct, please try to create User one more time.");
+            return createUser();
         }
-
-        forwarderTestUser.addAndRemoveLack.removeLack(testLack, forwarderTestUser);
-        for (Lack lack : forwarderTestUser.getLacksList()) {
-            System.out.println(lack);
+        System.out.println("Insert skypeID: ");
+        String skypeID = input.next();
+        System.out.println("Insert number to select user role: ");
+        for (int i = 0; i <= 2; i++) {
+            System.out.println("\t" + (i + 1) + ". " + Role.values()[i]);
         }
+        int roleNumber = input.nextInt() - 1;
+        Role role = Role.values()[roleNumber];
+        User createdUser = new User(userName, login, password, skypeID, role);
+        System.out.println("You have created a new User with the following data: " + createdUser);
+        return createdUser;
+    }
 
-        forwarderTestUser.addAndRemoveLack.changeStatus(testLack2, forwarderTestUser);
-        for (Lack lack : forwarderTestUser.getLacksList()) {
-            System.out.println(lack);
+    private static User getUserById(CRUDRepository<User> crudRepository) throws NullUserException {
+        System.out.println("Insert User's skype ID: ");
+        String skypeID = input.next();
+        User userToFind = NULL_OBJECT;
+        for (User user : crudRepository.getList()) {
+            if (user.getSkypeID().equals(skypeID)) {
+                userToFind = user;
+            }
         }
-
-        Supplier testSupplier = new Supplier();
-        Supplier testSupplier2 = new Supplier();
-
-        adminTestUser.addAndRemoveSupplier.addSupplier(testSupplier, adminTestUser);
-        System.out.println(testSupplier.listOfSuppliers);
-        adminTestUser.addAndRemoveSupplier.addSupplier(testSupplier2, adminTestUser);
-        System.out.println(testSupplier2.listOfSuppliers);
-        adminTestUser.addAndRemoveSupplier.removeSupplier(testSupplier2, adminTestUser);
-        System.out.println(testSupplier2.listOfSuppliers);
-
-        forwarderTestUser.addAndRemoveLack.addlack(testLack, forwarderTestUser, testSupplier);
-        System.out.println(forwarderTestUser.lacksList);
-
-        purchaserTestUser.setLack.setOrderedAmount(testLack, purchaserTestUser);
-        purchaserTestUser.setLack.setDate(testLack, purchaserTestUser);
-        purchaserTestUser.setLack.setComment(testLack, purchaserTestUser);
-        purchaserTestUser.setLack.changePurchaser(testLack, purchaserTestUser);
-        System.out.println(forwarderTestUser.lacksList);*/
+        if (userToFind == NULL_OBJECT) {
+            throw new NullUserException("Such User doesn't exist in the database.");
+        }
+        return userToFind;
     }
 }

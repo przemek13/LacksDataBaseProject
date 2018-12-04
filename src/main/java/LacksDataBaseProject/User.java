@@ -15,7 +15,20 @@ public class User extends LacksOperations{
     AddAndRemoveLack addAndRemoveLack;
     SetLack setLack;
 
-    protected List<User>listOfUsers = new ArrayList<>();
+    public User(String userName, String login, String password, String skypeID, Role role) {
+        this.userName = userName;
+        this.login = login;
+        this.password = password;
+        this.skypeID = skypeID;
+        this.role = role;
+    }
+
+    public User(String userName, String login, String password, String skypeID) {
+        this.userName = userName;
+        this.login = login;
+        this.password = password;
+        this.skypeID = skypeID;
+    }
 
     public User(Role role, AddAndRemoveSupplier addAndRemoveSupplier, AddAndRemoveUser addAndRemoveUser) {
         this.role = role;

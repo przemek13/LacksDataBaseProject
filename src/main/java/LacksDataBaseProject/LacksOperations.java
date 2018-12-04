@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class LacksOperations extends CheckUserRole {
+public class LacksOperations implements CheckUserRole {
 
     protected final List<Lack> lacksList;
 
@@ -17,8 +17,18 @@ public class LacksOperations extends CheckUserRole {
 
     private int startId=1;
 
+    @Override
+    public boolean checkUserRole(User user) throws ForwarderAccessException {
+        if (user.getRole() == Role.FORWARDER) {
+            return true;
+        }
+        else
+            throw new ForwarderAccessException("No authorization. Only Forwarders allowed to modify this data. ");
+    }
+
+
     protected void createMissingLackData(Lack lack, User user) throws ZeroDataException, WrongDateFormatException, LessThanZeroException, ForwarderAccessException, UserLackException {
-        if (checkIfForwarder(user)) {
+        if (checkUserRole(user)) {
             setLackID(lack);
             setForwarderSkypeID(lack, user);
             setLacksSetDateAndTime(lack, user);
@@ -31,50 +41,43 @@ public class LacksOperations extends CheckUserRole {
             //sendForwarderAlert(lack, user);
         }
     }
-    protected boolean checkUser (User user) throws ForwarderAccessException {
-        if (checkIfForwarder(user)) {
-            return true;
-        }
-        else
-            throw new ForwarderAccessException("No authorization. Only Forwarders allowed to modify this data. ");
-    }
 
     protected void setLackID(Lack lack) throws ZeroDataException {
         lack.setLackID(startId++);
     }
 
     protected void setForwarderSkypeID(Lack lack, User user) throws ForwarderAccessException {
-        checkUser(user);
+        checkUserRole(user);
         lack.setForwarderSkypeID(user.getSkypeID());
     }
 
     protected void setLacksSetDateAndTime(Lack lack, User user) throws WrongDateFormatException, ForwarderAccessException {
-        checkUser(user);
+        checkUserRole(user);
         lack.setLacksDateAndTime(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date()));
     }
 
     protected void openStatus(Lack lack, User user) throws ForwarderAccessException {
-        checkUser(user);
+        checkUserRole(user);
         lack.setStatus(true);
     }
 
     protected void setDefaultOrderedAmount(Lack lack, User user) throws LessThanZeroException, ForwarderAccessException {
-        checkUser(user);
+        checkUserRole(user);
         lack.setOrderedAmount(0);
     }
 
     protected void setDefaultExpectedDeliveryDateAndTime(Lack lack, User user) throws WrongDateFormatException, ForwarderAccessException {
-        checkUser(user);
+        checkUserRole(user);
         lack.setExpectedDeliveryDateAndTime(null);
     }
 
     protected void setDefaultPurchaserAdditionalComment(Lack lack, User user) throws ForwarderAccessException {
-        checkUser(user);
+        checkUserRole(user);
         lack.setPurchaserAdditionalComment(null);
     }
 
     protected String sendPurchaserAlert(Lack lack, User user) throws ForwarderAccessException, UserLackException {
-        checkUser(user);
+        checkUserRole(user);
         if (lack.getSupplier().getUser() != null) {
             return "Sending Alert to " + lack.getSupplier().getUser().getUserName();
         }
@@ -83,7 +86,7 @@ public class LacksOperations extends CheckUserRole {
 
     //! przenieść metodę do klasy SetLack - to tam powinien być wywoływany alert dla Forwardera
     protected void sendForwarderAlert(Lack lack, User user) throws ForwarderAccessException {
-        checkUser(user);
+        checkUserRole(user);
         if ((lack.getOrderedAmount() != 0) && (lack.getExpectedDeliveryDateAndTime() != lack.getLacksDateAndTime()) && (lack.getPurchaserAdditionalComment() != null)) {
             System.out.println("Sending Alert to " + lack.getForwarderSkypeID());
         }

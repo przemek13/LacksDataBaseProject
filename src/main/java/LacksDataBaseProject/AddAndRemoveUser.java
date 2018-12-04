@@ -1,56 +1,47 @@
 package LacksDataBaseProject;
 
-import java.util.Scanner;
+import LacksDataBaseProject.Exceptions.AdminAccessException;
 
-public class AddAndRemoveUser extends CheckUserRole {
-    static Scanner input = new Scanner(System.in);
-    private String password2;
+import java.io.PrintStream;
 
-    protected void addUser(User addingUser, User addedUser) {
-        if (checkIfAdmin(addingUser)) {
-            System.out.println("Name: ");
-            addedUser.userName = input.next();
-            System.out.println("SkypeID: ");
-            addedUser.skypeID = input.next();
-            System.out.println("Login: ");
-            addedUser.login = input.next();
-            System.out.println("Password: ");
-            addedUser.password = input.next();
-            System.out.println("Repeat password: ");
-            password2 = input.next();
-            if (addedUser.password.equals(password2)) {
-                while (true) {
-                    System.out.println("Select user roles: ");
-                    for (int i = 0; i < 2; i++) {
-                        System.out.println("\t" + (i + 1) + ". " + Role.values()[i]);
-                    }
-                    int addUserRole = input.nextInt();
-                    addedUser.setRole(Role.values()[addUserRole - 1]);
-                    addedUser.listOfUsers.add(addedUser);
-                    break;
-                }
-            } else {
-                System.out.println("Password is not correct.");
-            }
-        } else {
-            return;
+public class AddAndRemoveUser implements UserServiceAPI {
+
+    protected CRUDRepository<User> crudRepository;
+    private PrintStream out;
+
+    public AddAndRemoveUser(CRUDRepository<User> crudRepository) {
+        this.crudRepository = crudRepository;
+    }
+
+    @Override
+    public boolean checkUserRole(User user) throws AdminAccessException {
+        if (user.getRole() == Role.ADMIN) {
+            return true;
+        } else
+            throw new AdminAccessException("No authorization. Only Admin allowed to modify this data. ");
+    }
+
+    @Override
+    public void addUser(User addingUser, User addedUser) throws AdminAccessException {
+        if (checkUserRole(addingUser)) {
+            crudRepository.add(addedUser);
+            System.out.println(addedUser + " was added to the database.");
         }
     }
 
-    protected void removeUser(User removingUser, User removedUser) {
-        if (checkIfAdmin(removingUser)) {
-            System.out.println("Give skype ID, to remove: ");
-            String skypeID = input.next();
-            for (User userToRemove : removedUser.listOfUsers)
-                if (userToRemove.getSkypeID().equals(skypeID) && userToRemove.getRole() != Role.ADMIN) {
-                    removingUser.listOfUsers.remove(userToRemove);
-                    System.out.println("User was removed.");
-                    break;
-                }
-        } else {
-            return;
+    @Override
+    public void removeUser(User removingUser, User removedUser) throws AdminAccessException {
+        if (checkUserRole(removingUser)) {
+            crudRepository.delete(removedUser);
+            System.out.println(removedUser + " was removed from the data base.");
         }
+    }
 
+    @Override
+    public void showServiceUser() {
+        for (User user : crudRepository.getList()) {
+            System.out.println(user);
+        }
     }
 }
 

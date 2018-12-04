@@ -4,11 +4,20 @@ import LacksDataBaseProject.Exceptions.*;
 
 import java.util.Scanner;
 
-public class AddAndRemoveLack extends CheckUserRole {
+public class AddAndRemoveLack implements CheckUserRole {
     static Scanner input = new Scanner(System.in);
 
+    @Override
+    public boolean checkUserRole(User user) throws ForwarderAccessException {
+        if (user.getRole() == Role.FORWARDER) {
+            return true;
+        }
+        else
+            throw new ForwarderAccessException("No authorization. Only Forwarders allowed to modify this data. ");
+    }
+
     protected void addlack(Lack lack, User user, Supplier supplier) throws ZeroDataException, WrongDateFormatException, LessThanZeroException, ForwarderAccessException, UserLackException {
-        if (checkIfForwarder(user)) {
+        if (checkUserRole(user)) {
             System.out.println("Give item name: ");
             lack.setItemID(input.next());
             System.out.println("Give item ID: ");
@@ -33,8 +42,8 @@ public class AddAndRemoveLack extends CheckUserRole {
         }
     }
 
-    protected void removeLack(Lack lack, User user) {
-        if (checkIfForwarder(user)) {
+    protected void removeLack(Lack lack, User user) throws ForwarderAccessException {
+        if (checkUserRole(user)) {
             System.out.println("Give ID of lack to remove:");
             int lackID = Integer.parseInt(input.next());
             for (Lack lackToRemove : user.lacksList)
@@ -45,8 +54,8 @@ public class AddAndRemoveLack extends CheckUserRole {
         }
     }
 
-    protected void changeStatus(Lack lack, User user) {
-        if (checkIfForwarder(user)) {
+    protected void changeStatus(Lack lack, User user) throws ForwarderAccessException {
+        if (checkUserRole(user)) {
             lack.setStatus(false);
         } else {
             return;
