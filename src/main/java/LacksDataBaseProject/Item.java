@@ -1,8 +1,8 @@
 package LacksDataBaseProject;
 
 public class Item {
-    private String itemID;
-    private String itemName;
+    protected String itemID;
+    protected String itemName;
 
     Item(String itemID, String itemName) {
         if (itemID == null || itemID.isEmpty()) {
@@ -36,15 +36,15 @@ public class Item {
         }
     }
 
-    public String getItemName () {
+    public String getItemName() {
         return itemName;
     }
 
     @Override
-    public String toString () {
+    public String toString() {
         return "Item{" +
                 "itemID='" + itemID + '\'' +
                 ", itemName='" + itemName + '\'' +
                 '}';
-        }
+    }
 }

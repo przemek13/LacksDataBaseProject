@@ -38,6 +38,20 @@ public class Lack extends Item {
         this.purchaserAdditionalComment = purchaserAdditionalComment;
     }
 
+    public Lack(String itemID, String itemName, int requiredAmount, String unitOfMeasure, String forwarderAdditionalComment, Supplier supplier) {
+        super(itemID, itemName);
+        this.item = new Item(itemID, itemName);
+        this.requiredAmount = requiredAmount;
+        this.unitOfMeasure = unitOfMeasure;
+        this.forwarderAdditionalComment = forwarderAdditionalComment;
+        this.supplier = supplier;
+    }
+
+    public Lack(String itemID, String itemName) {
+        super(itemID, itemName);
+        this.item = new Item("not found", "not found");
+    }
+
     protected void setRequiredAmount(int requiredAmount) throws ZeroDataException {
         if (requiredAmount <= 0) {
             throw new ZeroDataException("requiredAmount can't be empty or less than 0");
@@ -63,7 +77,7 @@ public class Lack extends Item {
     }
 
     protected void setForwarderAdditionalComment(String forwarderAdditionalComment) {
-            this.forwarderAdditionalComment = forwarderAdditionalComment;
+        this.forwarderAdditionalComment = forwarderAdditionalComment;
     }
 
     public String getForwarderAdditionalComment() {

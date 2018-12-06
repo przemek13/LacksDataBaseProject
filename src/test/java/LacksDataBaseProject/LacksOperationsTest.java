@@ -22,14 +22,6 @@ public class LacksOperationsTest {
     }
 
     @Test
-    public void ifSetUpLackOperationsInitializeEmptyList() {
-        //given
-        //when
-        //then
-        assertEquals(0, testLackOperations.getLacksList().size());
-    }
-
-    @Test
     public void createMissingLackData() {
     }
 
@@ -87,7 +79,7 @@ public class LacksOperationsTest {
         //when
         testLackOperations.setLacksSetDateAndTime(testLack, testUser);
         //then
-        assertEquals("2018-11-27 16:08", testLack.getLacksDateAndTime());
+        assertEquals("2018-12-06 11:51", testLack.getLacksDateAndTime());
     }
 
     @Test

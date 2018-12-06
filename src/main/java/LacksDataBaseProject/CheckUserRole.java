@@ -5,5 +5,5 @@ import LacksDataBaseProject.Exceptions.ForwarderAccessException;
 import LacksDataBaseProject.Exceptions.PurchaserAccessException;
 
 public interface CheckUserRole {
-    boolean checkUserRole (User user) throws ForwarderAccessException, AdminAccessException, PurchaserAccessException;
+    boolean checkUserRole(User user) throws ForwarderAccessException, AdminAccessException, PurchaserAccessException;
 }

@@ -3,29 +3,19 @@ package LacksDataBaseProject;
 import LacksDataBaseProject.Exceptions.*;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class LacksOperations implements CheckUserRole {
 
-    protected final List<Lack> lacksList;
-
-    public LacksOperations () {
-        this.lacksList = new ArrayList<>();
-    };
-
-    private int startId=1;
+    private int startId = 1;
 
     @Override
     public boolean checkUserRole(User user) throws ForwarderAccessException {
         if (user.getRole() == Role.FORWARDER) {
             return true;
-        }
-        else
+        } else
             throw new ForwarderAccessException("No authorization. Only Forwarders allowed to modify this data. ");
     }
-
 
     protected void createMissingLackData(Lack lack, User user) throws ZeroDataException, WrongDateFormatException, LessThanZeroException, ForwarderAccessException, UserLackException {
         if (checkUserRole(user)) {
@@ -36,9 +26,7 @@ public class LacksOperations implements CheckUserRole {
             setDefaultOrderedAmount(lack, user);
             setDefaultExpectedDeliveryDateAndTime(lack, user);
             setDefaultPurchaserAdditionalComment(lack, user);
-            lacksList.add(lack);
             sendPurchaserAlert(lack, user);
-            //sendForwarderAlert(lack, user);
         }
     }
 
@@ -80,19 +68,6 @@ public class LacksOperations implements CheckUserRole {
         checkUserRole(user);
         if (lack.getSupplier().getUser() != null) {
             return "Sending Alert to " + lack.getSupplier().getUser().getUserName();
-        }
-        else throw new UserLackException("No Purchaser assigned to this Supplier");
-    }
-
-    //! przenieść metodę do klasy SetLack - to tam powinien być wywoływany alert dla Forwardera
-    protected void sendForwarderAlert(Lack lack, User user) throws ForwarderAccessException {
-        checkUserRole(user);
-        if ((lack.getOrderedAmount() != 0) && (lack.getExpectedDeliveryDateAndTime() != lack.getLacksDateAndTime()) && (lack.getPurchaserAdditionalComment() != null)) {
-            System.out.println("Sending Alert to " + lack.getForwarderSkypeID());
-        }
-    }
-
-    public List<Lack> getLacksList() {
-        return lacksList;
+        } else throw new UserLackException("No Purchaser assigned to this Supplier");
     }
 }

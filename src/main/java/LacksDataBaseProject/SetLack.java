@@ -1,65 +1,40 @@
 package LacksDataBaseProject;
 
-import LacksDataBaseProject.Exceptions.AdminAccessException;
 import LacksDataBaseProject.Exceptions.LessThanZeroException;
 import LacksDataBaseProject.Exceptions.PurchaserAccessException;
 import LacksDataBaseProject.Exceptions.WrongDateFormatException;
 
-import java.util.Scanner;
-
 public class SetLack implements CheckUserRole {
-    static Scanner input = new Scanner(System.in);
 
     @Override
     public boolean checkUserRole(User user) throws PurchaserAccessException {
         if (user.getRole() == Role.PURCHASER) {
             return true;
-        }
-        else
-            throw new PurchaserAccessException ("No authorization. Only Purhcaser allowed to modify this data. ");
+        } else
+            throw new PurchaserAccessException("No authorization. Only Purhcaser allowed to modify this data. ");
     }
 
     protected void setDate(Lack lack, User user) throws WrongDateFormatException, PurchaserAccessException {
         if (checkUserRole(user)) {
-            System.out.println("Give expected delivery date and time: ");
-            lack.setExpectedDeliveryDateAndTime(input.next());
-        } else {
-            return;
+            lack.setExpectedDeliveryDateAndTime(App.getExpectedDeliveryDateAndTime());
+            System.out.println("Sending Alert to " + lack.getForwarderSkypeID() + ". "
+                    + " Purchaser changed delivery date in the following lack: " + lack);
         }
     }
 
     protected void setComment(Lack lack, User user) throws PurchaserAccessException {
         if (checkUserRole(user)) {
-            System.out.println("Give comment: ");
-            lack.setPurchaserAdditionalComment(input.next());
-        } else {
-            return;
+            lack.setPurchaserAdditionalComment(App.getPurchaserComment());
+            System.out.println("Sending Alert to " + lack.getForwarderSkypeID() + ". "
+                    + " Purchaser put new comment in the following lack: " + lack);
         }
     }
 
     protected void setOrderedAmount(Lack lack, User user) throws LessThanZeroException, PurchaserAccessException {
         if (checkUserRole(user)) {
-            System.out.println("Give ordered amount: ");
-            lack.setOrderedAmount(input.nextInt());
-        } else {
-            return;
-        }
-    }
-
-    protected void changePurchaser(Lack lack, User user) throws PurchaserAccessException {
-        if (checkUserRole(user)) {
-            System.out.println("Select Purchaser from list, give Skype ID: ");
-            for (User purcharser : user.addAndRemoveUser.crudRepository.getList()) {
-                if (purcharser.getRole().equals(Role.PURCHASER)) {
-                    System.out.println("\t" + purcharser);
-                    String skypeID = input.next();
-                    if (purcharser.getSkypeID().equals(skypeID)) {
-                        lack.getSupplier().setUser(purcharser);
-                    }
-                }
-            }
-        } else {
-            return;
+            lack.setOrderedAmount(App.getOrderedAmount());
+            System.out.println("Sending Alert to " + lack.getForwarderSkypeID() + ". "
+                    + " Purchaser changed ordered amount in the following lack: " + lack);
         }
     }
 }
