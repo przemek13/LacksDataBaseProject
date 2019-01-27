@@ -5,6 +5,8 @@ public class Supplier {
     protected String supplierName;
     protected User user;
 
+    public static final Supplier NULL_SUPPLIER = new Supplier("not found");
+
     public Supplier(String supplierID, String supplierName, User user) {
         this.supplierID = supplierID;
         this.supplierName = supplierName;

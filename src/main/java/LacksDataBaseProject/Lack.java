@@ -22,6 +22,8 @@ public class Lack extends Item {
     private String expectedDeliveryDateAndTime;
     private String purchaserAdditionalComment;
 
+    public static final Lack NULL_LACK = new Lack("not found", "not found");
+
     public Lack(String itemID, String itemName, int requiredAmount, String unitOfMeasure, String forwarderAdditionalComment, Supplier supplier, int lackID, String forwarderSkypeID, String lacksDateAndTime, Boolean status, int orderedAmount, String expectedDeliveryDateAndTime, String purchaserAdditionalComment) {
         super(itemID, itemName);
         this.item = new Item(itemID, itemName);

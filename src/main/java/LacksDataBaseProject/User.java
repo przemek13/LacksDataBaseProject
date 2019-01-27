@@ -7,6 +7,8 @@ public class User extends LacksOperations {
     protected String skypeID;
     protected Role role;
 
+    public static final User NULL_USER = new User("not found");
+
     public User(String userName, String login, String password, String skypeID, Role role) {
         this.userName = userName;
         this.login = login;

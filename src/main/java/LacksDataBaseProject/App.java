@@ -14,10 +14,6 @@ public class App {
 
     private static Scanner input = new Scanner(System.in);
 
-    public static final User NULL_USER = new User("not found");
-    public static final Supplier NULL_SUPPLIER = new Supplier("not found");
-    public static final Lack NULL_LACK = new Lack("not found", "not found");
-
     private static User createUser() {
         System.out.println("Insert User's name: ");
         String userName = input.next();
@@ -47,20 +43,20 @@ public class App {
     private static User getUserById(CRUDRepository<User> crudRepository) throws NullUserException {
         System.out.println("Insert User's skype ID: ");
         String skypeID = input.next();
-        User userToFind = NULL_USER;
+        User userToFind = User.NULL_USER;
         for (User user : crudRepository.getList()) {
             if (user.getSkypeID().equals(skypeID)) {
                 userToFind = user;
             }
         }
-        if (userToFind == NULL_USER) {
+        if (userToFind == User.NULL_USER) {
             throw new NullUserException("Such User doesn't exist in the database.");
         }
         return userToFind;
     }
 
     private static User choosePurchaser(CRUDRepository<User> crudRepository) {
-        User user = NULL_USER;
+        User user = User.NULL_USER;
         System.out.println("Select Purchaser from the List. Insert Purchaser's Skype ID: ");
         for (User purchaser : crudRepository.getList()) {
             if (purchaser.getRole().equals(Role.PURCHASER)) {
@@ -86,12 +82,12 @@ public class App {
     private static Supplier getSupplierById(CRUDRepository<Supplier> crudRepository) throws NullSupplierException {
         System.out.println("Insert Supplier's ID: ");
         String supplierID = input.next();
-        Supplier supplierToFind = NULL_SUPPLIER;
+        Supplier supplierToFind = Supplier.NULL_SUPPLIER;
         for (Supplier supplier : crudRepository.getList()) {
             if (supplier.getSupplierID().equals(supplierID)) {
                 supplierToFind = supplier;
             }
-            if (supplierToFind == NULL_SUPPLIER) {
+            if (supplierToFind == Supplier.NULL_SUPPLIER) {
                 throw new NullSupplierException("Such Supplier doesn't exist in the database.");
             }
         }
@@ -100,7 +96,7 @@ public class App {
 
     private static Supplier chooseSupplier(CRUDRepository<Supplier> crudRepository) {
         System.out.println("Select Supplier from the list. Insert Supplier's ID: ");
-        Supplier supplierToAdd = NULL_SUPPLIER;
+        Supplier supplierToAdd = Supplier.NULL_SUPPLIER;
         for (Supplier supplier : crudRepository.getList()) {
             System.out.println("\t" + supplier);
             String supplierID = input.next();
@@ -129,13 +125,13 @@ public class App {
     private static Lack getLackById(CRUDRepository<Lack> crudRepository) throws NullLackException {
         System.out.println("Insert Lack's ID: ");
         int lackID = input.nextInt();
-        Lack lackToFind = NULL_LACK;
+        Lack lackToFind = Lack.NULL_LACK;
         for (Lack lack : crudRepository.getList()) {
             if (lack.getLackID() == lackID) {
                 lackToFind = lack;
             }
         }
-        if (lackToFind == NULL_LACK) {
+        if (lackToFind == Lack.NULL_LACK) {
             throw new NullLackException("Such Lack doesn't exist in the database.");
         }
         return lackToFind;
